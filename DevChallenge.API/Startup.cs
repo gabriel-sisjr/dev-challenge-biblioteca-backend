@@ -1,23 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DevChallenge.Data.Context;
+using DevChallenge.Data.Entities;
+using DevChallenge.Data.Repositories;
+using DevChallenge.Data.Repositories.Interfaces;
+using DevChallenge.Service.Services;
+using DevChallenge.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using DevChallenge.Data.Context;
-using DevChallenge.Data.Repositories.Interfaces;
-using DevChallenge.Data.Repositories;
-using DevChallenge.Data.Entities;
-using DevChallenge.Service.Services.Interfaces;
-using DevChallenge.Service.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace DevChallenge.API
 {
@@ -42,7 +35,7 @@ namespace DevChallenge.API
             services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
             services.AddScoped<DataContext, DataContext>();
             services.AddScoped<IRepository<Book>, Repository<Book>>();
-            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookRepository<Book>, BookRepository>();
             services.AddScoped<IBookService, BookService>();
         }
 

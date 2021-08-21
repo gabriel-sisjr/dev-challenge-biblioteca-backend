@@ -1,16 +1,15 @@
-using System;
-using System.Collections.Generic;
 using DevChallenge.Data.Entities;
-
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DevChallenge.Service.Services.Interfaces
 {
     public interface IBookService
     {
-        IEnumerable<Book> GetAllBooks();
-        Book GetBookById(int bookId);
-        void InsertBook(Book book);
+        Task<IEnumerable<Book>> GetAllBooks();
+        Task<Book> GetBookById(int bookId);
+        Task InsertBook(Book book);
         void UpdateBook(Book book);
-        void RemoveBook(int bookId);
+        Task RemoveBook(int bookId);
     }
 }

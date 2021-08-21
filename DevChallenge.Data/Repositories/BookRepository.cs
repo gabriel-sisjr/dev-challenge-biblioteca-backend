@@ -1,42 +1,13 @@
-using System;
-using System.Linq;
-using DevChallenge.Data.Repositories.Interfaces;
+using DevChallenge.Data.Context;
 using DevChallenge.Data.Entities;
+using DevChallenge.Data.Repositories.Interfaces;
 
 namespace DevChallenge.Data.Repositories
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository : Repository<Book>, IBookRepository<Book>
     {
         private readonly IRepository<Book> _repository;
 
-        public BookRepository(IRepository<Book> repository)
-        {
-            _repository = repository;
-        }
-
-        public IQueryable<Book> GetAll()
-        {
-            return _repository.GetAll();
-        }
-
-        public Book GetById(int bookId)
-        {
-            return _repository.GetById(bookId);
-        }
-
-        public void Insert(Book book)
-        {
-            _repository.Insert(book);
-        }
-
-        public void Update(Book book)
-        {
-            _repository.Update(book);
-        }
-
-        public void Remove(int bookId)
-        {
-            _repository.Remove(bookId);
-        }
+        public BookRepository(DataContext context, IRepository<Book> repository) : base(context) => _repository = repository;
     }
 }

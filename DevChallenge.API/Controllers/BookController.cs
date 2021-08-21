@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using DevChallenge.Data.Entities;
 using DevChallenge.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DevChallenge.API.Controllers
 {
@@ -13,25 +10,12 @@ namespace DevChallenge.API.Controllers
     {
         readonly IBookService _bookService;
 
-        public BookController(IBookService bookService)
-        {
-            _bookService = bookService;
-        }
+        public BookController(IBookService bookService) => _bookService = bookService;
 
-        [HttpGet]
-        [Route("")]
-        public IActionResult Get()
-        {
-            var books = _bookService.GetAllBooks();
-            return Ok(books);
-        }
+        [HttpGet("")]
+        public async Task<IActionResult> Get() => Ok(await _bookService.GetAllBooks());
 
-        [HttpGet]
-        [Route("{id}")]
-        public IActionResult Get(int id)
-        {
-            var book = _bookService.GetBookById(id);
-            return Ok(book);
-        }        
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id) => Ok(await _bookService.GetBookById(id));
     }
 }
